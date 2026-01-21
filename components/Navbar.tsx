@@ -29,18 +29,14 @@ export default function Navbar({ activePage, setPage, onScrollToSection }: Props
   ];
 
   const handleNavClick = (id: string) => {
-    // Close mobile menu on any click
     setMobileMenu(false);
 
-    // If you want "How it Works" to scroll on the HOME page:
     if (id === "how-it-works") {
-      // Ensure Home renders first, then scroll
       if (activePage !== "home") setPage("home");
       setTimeout(() => onScrollToSection?.("how-it-works"), 0);
       return;
     }
 
-    // Normal route/state switch
     setPage(id);
   };
 
@@ -62,7 +58,7 @@ export default function Navbar({ activePage, setPage, onScrollToSection }: Props
             <BookOpen className="text-white w-6 h-6" />
           </div>
           <span className="text-2xl font-black tracking-tighter text-slate-900">
-            Academia<span className="text-[#FF6B00]">Support</span>
+            Scholar <span className="text-[#FF6B00]">Nest</span>
           </span>
         </div>
 
@@ -98,17 +94,18 @@ export default function Navbar({ activePage, setPage, onScrollToSection }: Props
           </button>
 
           <button
-  onClick={() => setPage("order")}
-  className="bg-[#FF6B00] text-white text-sm font-bold px-6 py-2.5 rounded-full hover:bg-[#e66000] shadow-lg shadow-orange-200 transition-all transform hover:-translate-y-0.5"
->
-  Get Started
-</button>
+            onClick={() => setPage("order")}
+            className="bg-[#FF6B00] text-white text-sm font-bold px-6 py-2.5 rounded-full hover:bg-[#e66000] shadow-lg shadow-orange-200 transition-all transform hover:-translate-y-0.5"
+          >
+            Get Started
+          </button>
         </div>
 
         {/* Mobile Toggle */}
         <button
           className="lg:hidden p-2 text-slate-900"
           onClick={() => setMobileMenu((v) => !v)}
+          aria-label="Toggle mobile menu"
         >
           {mobileMenu ? <X /> : <Menu />}
         </button>
@@ -117,17 +114,22 @@ export default function Navbar({ activePage, setPage, onScrollToSection }: Props
       {/* Mobile Menu */}
       {mobileMenu && (
         <div className="lg:hidden absolute top-full left-0 w-full bg-white border-b border-gray-100 p-6 flex flex-col gap-4 shadow-xl">
+          {/* Mobile nav links */}
           {navItems.map((item) => (
-   <button
-   onClick={() => {
-     setPage("order");
-     setMobileMenu(false);
-   }}
-   className="w-full py-4 bg-[#FF6B00] text-white rounded-xl font-bold"
- >
-   Start Your Project
- </button>
+            <button
+              key={item.id}
+              onClick={() => handleNavClick(item.id)}
+              className={cn(
+                "w-full text-left py-3 px-2 rounded-lg font-semibold transition-colors",
+                activePage === item.id
+                  ? "text-[#FF6B00] bg-orange-50"
+                  : "text-slate-800 hover:bg-slate-50"
+              )}
+            >
+              {item.name}
+            </button>
           ))}
+
 
           <button
             onClick={() => handleNavClick("contact")}
@@ -136,12 +138,16 @@ export default function Navbar({ activePage, setPage, onScrollToSection }: Props
             Contact Us
           </button>
 
-<button
-  onClick={() => setPage("order")}
-  className="bg-[#FF6B00] text-white text-sm font-bold px-6 py-2.5 rounded-full hover:bg-[#e66000] shadow-lg shadow-orange-200 transition-all transform hover:-translate-y-0.5"
->
-  Get Started
-</button>
+          {/* Get Started - keep EXACT style */}
+          <button
+            onClick={() => {
+              setPage("order");
+              setMobileMenu(false);
+            }}
+            className="bg-[#FF6B00] text-white text-sm font-bold px-6 py-2.5 rounded-full hover:bg-[#e66000] shadow-lg shadow-orange-200 transition-all transform hover:-translate-y-0.5"
+          >
+            Get Started
+          </button>
         </div>
       )}
     </nav>

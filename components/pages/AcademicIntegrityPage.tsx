@@ -31,7 +31,7 @@ export default function AcademicIntegrityPage({ onContact, }: Props) {
       <main className="w-full max-w-7xl px-6 py-12 md:py-20 grid md:grid-cols-2 gap-12 items-center">
         <div className="order-2 md:order-1">
           <img
-            src="https://picsum.photos/seed/academic/800/600"
+            src="academic.jpeg"
             alt="University Campus"
             className="rounded-2xl shadow-2xl w-full object-cover aspect-[4/3]"
           />

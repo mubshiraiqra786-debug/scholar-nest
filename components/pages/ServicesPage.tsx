@@ -16,7 +16,9 @@ export default function ServicesPage() {
   return (
     <div className="pt-32 pb-24">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="relative rounded-[2.5rem] overflow-hidden bg-slate-900 mb-20 aspect-[21/9] flex items-center justify-center text-center">
+        <div className="relative rounded-[2.5rem] overflow-hidden bg-slate-900 mb-20
+                aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/9]
+                flex items-center justify-center text-center">
           <img
             src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2000&auto=format&fit=crop"
             className="absolute inset-0 w-full h-full object-cover opacity-40"
