@@ -1,0 +1,1 @@
+export type PolicySection = "tos" | "ethical" | "privacy" | "cookie";

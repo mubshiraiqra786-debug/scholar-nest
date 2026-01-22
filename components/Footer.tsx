@@ -1,9 +1,10 @@
 import React from "react";
+import type { PolicySection } from "@/lib/types";
 import { Mail, Facebook, Instagram } from "lucide-react";
 
 type FooterProps = {
-  onNavigate?: (page: string) => void;
-  onOpenPolicies?: (page: string) => void;
+  onNavigate: (p: string) => void;
+  onOpenPolicies: (section: PolicySection) => void; // <-- yahan fix
 };
 
 export default function Footer({ onNavigate, onOpenPolicies }: FooterProps) {
@@ -117,14 +118,14 @@ export default function Footer({ onNavigate, onOpenPolicies }: FooterProps) {
                   <button
                     type="button"
                     className="text-left hover:text-orange-400"
-                    onClick={() => onOpenPolicies?.("terms")}
+                    onClick={() => onOpenPolicies?.("tos")}
                   >
                     Terms of Service
                   </button>
                   <button
                     type="button"
                     className="text-left hover:text-orange-400"
-                    onClick={() => onOpenPolicies?.("ethics")}
+                    onClick={() => onOpenPolicies?.("ethical")}
                   >
                     Ethics Policy
                   </button>
