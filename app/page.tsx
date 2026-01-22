@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-
+import type { PolicySection } from "@/lib/types";
 import Hero from "@/components/home/Hero";
 import TrustBadges from "../components/home/TrustBadges";
 import ServicesSection from "../components/home/ServicesSection";
@@ -22,7 +22,9 @@ import PoliciesPage from "../components/pages/PoliciesPage";
 
 export default function Page() {
   const [page, setPage] = useState("home");
-  const [policySection, setPolicySection] = useState<"tos"|"ethical"|"privacy"|"cookie">("tos");
+
+  type PolicySection = "tos" | "ethical" | "privacy" | "cookie";
+  const [policySection, setPolicySection] = useState<PolicySection>("privacy");
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [page]);
@@ -98,7 +100,7 @@ export default function Page() {
       {renderContent()}
       <Footer
   onNavigate={(p) => setPage(p)}
-  onOpenPolicies={(section) => {
+  onOpenPolicies={(section: PolicySection) => {
     setPolicySection(section);
     setPage("policies");
   }}
