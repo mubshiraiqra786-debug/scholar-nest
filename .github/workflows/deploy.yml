@@ -30,13 +30,13 @@ jobs:
         run: npm run lint --if-present
 
       - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.0.3
+        uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+          host_fingerprint: ${{ secrets.SSH_FINGERPRINT }}
           script: |
             set -e
             cd /var/www/scholar-nest
