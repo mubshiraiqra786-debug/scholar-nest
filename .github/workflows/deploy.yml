@@ -36,7 +36,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          fingerprint: ${{ secrets.SSH_FINGERPRINT }}
+          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
           script: |
             set -e
             cd /var/www/scholar-nest
