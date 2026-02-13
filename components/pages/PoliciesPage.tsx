@@ -245,9 +245,7 @@ export default function PoliciesPage({ initialSection = "privacy", onContact}: P
           <section id="cookie" className="mb-20 scroll-mt-24">
             <h2 className="text-2xl font-bold text-slate-900 mb-6">Cookie Policy</h2>
             <p className="text-gray-500 text-xs leading-relaxed">
-              Our platform uses cookies to maintain your session, remember your preferences, and provide localized content.
-              We differentiate between "Essential Cookies" required for platform stability and "Analytical Cookies" used for
-              performance monitoring.
+            {'"Our platform uses cookies to maintain your session, remember your preferences, and provide localized content. We differentiate between "Essential Cookies" required for platform stability and "Analytical Cookies" used for performance monitoring."'}
             </p>
           </section>
         </main>

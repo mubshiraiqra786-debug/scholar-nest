@@ -74,12 +74,17 @@ export default function ContactPage() {
       setEmail("");
       setCategory("General Inquiry");
       setMessage("");
-    } catch (err: any) {
+    } 
+    catch (err: unknown) {
+      const msg =
+        err instanceof Error ? err.message : "Something went wrong. Please try again.";
+    
       setStatus({
         type: "error",
-        text: err?.message || "Something went wrong. Please try again.",
+        text: msg,
       });
-    } finally {
+    }
+    finally {
       setIsSending(false);
     }
   };
