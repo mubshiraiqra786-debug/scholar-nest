@@ -47,9 +47,7 @@ export default function AcademicIntegrityPage({ onContact, }: Props) {
             institutional excellence.
           </h1>
           <p className="text-gray-600 text-lg leading-relaxed max-w-lg">
-            A modern platform dedicated to US university students, built on the pillars
-            of transparency, rigorous ethics, and long-term academic success. We don't
-            just provide answers; we foster understanding.
+            {'"A modern platform dedicated to US university students, built on the pillars of transparency, rigorous ethics, and long-term academic success. We dont just provide answers; we foster understanding."'}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mt-4">
             <button onClick={scrollToUsePolicy} className="bg-orange-600 text-white px-8 py-4 rounded-lg font-bold hover:bg-orange-700 transition-all shadow-lg hover:shadow-orange-200">
@@ -102,9 +100,7 @@ export default function AcademicIntegrityPage({ onContact, }: Props) {
           </h2>
 
           <div className="bg-white p-6 rounded-xl italic text-gray-700 border-l-4 border-orange-500 mb-10 shadow-sm leading-relaxed">
-            "Our mission is to empower students through knowledge, not to provide shortcuts.
-            We maintain a zero-tolerance policy regarding the misuse of our platform for
-            academic dishonesty."
+            {'"Our mission is to empower students through knowledge, not to provide shortcuts. We maintain a zero-tolerance policy regarding the misuse of our platform for academic dishonesty."'}
           </div>
 
           <div className="grid md:grid-cols-2 gap-12">

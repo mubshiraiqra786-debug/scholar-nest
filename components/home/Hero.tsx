@@ -67,7 +67,7 @@ export default function HeroHero({ onGoServices, onGoOrder }: Props) {
                   <span className="text-sm font-medium">84 Experts Online Now</span>
                 </div>
                 <p className="text-xl font-bold">
-                  "The research quality was exactly what my professor expected."
+                  {'"The research quality was exactly what my professor expected."'}
                 </p>
                 <p className="text-sm opacity-80 mt-1">— Sarah J., NYU Student</p>
               </div>

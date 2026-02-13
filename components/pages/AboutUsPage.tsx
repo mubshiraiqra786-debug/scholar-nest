@@ -108,7 +108,7 @@ const AboutUs: React.FC = () => {
         <section className="text-center py-12 w-full bg-[#F8F7F5] rounded-3xl border-gray-100">
           <Quote className="w-8 h-8 text-orange-200 mx-auto mb-1" />
           <p className="text-xl italic text-slate-700 max-w-2xl mx-auto mb-1 leading-relaxed">
-            "Our goal is not merely to provide answers, but to facilitate a deeper understanding of academic discourse while respecting the institutional frameworks that define US higher education."
+            {'"Our goal is not merely to provide answers, but to facilitate a deeper understanding of academic discourse while respecting the institutional frameworks that define US higher education."'}
           </p>
           <p className="text-[13px] font-bold text-slate-400 uppercase tracking-[0.2em]">
             Academic Standards Council

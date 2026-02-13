@@ -84,7 +84,7 @@ export default function Page() {
         return <OrderNowPage />;
 
       case "policies":
-        return <PoliciesPage initialSection={policySection} />;
+        return <PoliciesPage initialSection={policySection} onContact={() => setPage("contact")}/>;
 
       default:
         return <Hero 

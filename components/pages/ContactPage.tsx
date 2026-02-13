@@ -1,11 +1,32 @@
 "use client";
 
 import React, { useState } from "react";
-import { ChevronDown, Clock, Globe, Lock, MessageSquare, Shield, Users, Zap } from "lucide-react";
+import {
+  ChevronDown,
+  Clock,
+  Globe,
+  Lock,
+  MessageSquare,
+  Shield,
+  Users,
+  Zap,
+} from "lucide-react";
 import { cn } from "@/lib/cn";
 
 export default function ContactPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+
+  // ✅ Form state
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [category, setCategory] = useState("General Inquiry");
+  const [message, setMessage] = useState("");
+
+  // ✅ UX state
+  const [isSending, setIsSending] = useState(false);
+  const [status, setStatus] = useState<null | { type: "success" | "error"; text: string }>(
+    null
+  );
 
   const faqs = [
     {
@@ -22,6 +43,47 @@ export default function ContactPage() {
     },
   ];
 
+  // ✅ Submit handler -> calls /api/contact (your SendGrid route)
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus(null);
+
+    if (!fullName.trim() || !email.trim() || !message.trim()) {
+      setStatus({ type: "error", text: "Please fill Full Name, Email, and Message." });
+      return;
+    }
+
+    setIsSending(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ fullName, email, category, message }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || !data.ok) {
+        throw new Error(data?.error || "Send failed");
+      }
+
+      setStatus({ type: "success", text: "Request submitted! We’ll contact you shortly." });
+
+      // reset
+      setFullName("");
+      setEmail("");
+      setCategory("General Inquiry");
+      setMessage("");
+    } catch (err: any) {
+      setStatus({
+        type: "error",
+        text: err?.message || "Something went wrong. Please try again.",
+      });
+    } finally {
+      setIsSending(false);
+    }
+  };
+
   return (
     <div className="pt-32 pb-24 bg-[#FAFAFA] min-h-screen">
       <div className="max-w-6xl mx-auto px-6">
@@ -30,7 +92,8 @@ export default function ContactPage() {
             Contact & Support Center
           </h1>
           <p className="text-slate-500 max-w-2xl mx-auto text-lg">
-            Professional academic assistance with institutional trust. We prioritize your confidentiality and academic success.
+            Professional academic assistance with institutional trust. We prioritize your
+            confidentiality and academic success.
           </p>
         </div>
 
@@ -44,7 +107,7 @@ export default function ContactPage() {
                 <h2 className="text-xl font-bold text-slate-900">Send us a Message</h2>
               </div>
 
-              <form className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-xs font-bold text-slate-400 uppercase tracking-wider">
@@ -52,16 +115,21 @@ export default function ContactPage() {
                     </label>
                     <input
                       type="text"
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
                       placeholder="Jane Doe"
                       className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-100 transition-all"
                     />
                   </div>
+
                   <div className="space-y-2">
                     <label className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-                      University Email (.edu)
+                      Email
                     </label>
                     <input
                       type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       placeholder="student@university.edu"
                       className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-100 transition-all"
                     />
@@ -73,7 +141,11 @@ export default function ContactPage() {
                     Inquiry Category
                   </label>
                   <div className="relative">
-                    <select className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-100 appearance-none cursor-pointer transition-all">
+                    <select
+                      value={category}
+                      onChange={(e) => setCategory(e.target.value)}
+                      className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-100 appearance-none cursor-pointer transition-all"
+                    >
                       <option>General Inquiry</option>
                       <option>Project Update</option>
                       <option>Billing Question</option>
@@ -89,19 +161,38 @@ export default function ContactPage() {
                   </label>
                   <textarea
                     rows={5}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
                     placeholder="How can we help you today?"
                     className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-100 transition-all resize-none"
                   />
                 </div>
 
-                <button className="w-full md:w-auto px-10 py-4 bg-[#FF6B00] text-white font-bold rounded-xl hover:bg-orange-600 shadow-lg shadow-orange-100 transition-all">
-                  Submit Request
+                {status && (
+                  <div
+                    className={cn(
+                      "rounded-xl px-4 py-3 text-sm font-semibold",
+                      status.type === "success"
+                        ? "bg-green-50 text-green-700"
+                        : "bg-red-50 text-red-700"
+                    )}
+                  >
+                    {status.text}
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={isSending}
+                  className="w-full md:w-auto px-10 py-4 bg-[#FF6B00] text-white font-bold rounded-xl hover:bg-orange-600 shadow-lg shadow-orange-100 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  {isSending ? "Sending..." : "Submit Request"}
                 </button>
+
                 <p className="text-[10px] text-slate-400 italic">
                   By submitting, you agree to our confidentiality and privacy protocols.
                 </p>
               </form>
-`
             </div>
           </div>
 
@@ -110,7 +201,8 @@ export default function ContactPage() {
               <div className="flex justify-between items-center mb-6">
                 <h3 className="font-bold text-slate-900">Support Status</h3>
                 <div className="flex items-center gap-2 px-2 py-1 bg-green-50 text-green-600 rounded-full text-[10px] font-black uppercase tracking-tighter">
-                  <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" /> Live Now
+                  <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" /> Live
+                  Now
                 </div>
               </div>
 
@@ -126,6 +218,7 @@ export default function ContactPage() {
                     </p>
                   </div>
                 </div>
+
                 <div className="flex gap-4">
                   <Zap className="text-orange-500 w-5 h-5 shrink-0" />
                   <div>
@@ -140,6 +233,7 @@ export default function ContactPage() {
               <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest text-center mb-6">
                 Trust & Security
               </h4>
+
               <div className="grid grid-cols-2 gap-4">
                 {[
                   { icon: Lock, label: "SSL Secure" },
@@ -169,8 +263,12 @@ export default function ContactPage() {
 
           <div className="space-y-4">
             {faqs.map((faq, idx) => (
-              <div key={idx} className="bg-white border border-slate-100 rounded-2xl overflow-hidden">
+              <div
+                key={idx}
+                className="bg-white border border-slate-100 rounded-2xl overflow-hidden"
+              >
                 <button
+                  type="button"
                   onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
                   className="w-full flex items-center justify-between px-8 py-6 text-left hover:bg-slate-50 transition-all"
                 >
@@ -182,6 +280,7 @@ export default function ContactPage() {
                     )}
                   />
                 </button>
+
                 <div
                   className={cn(
                     "px-8 overflow-hidden transition-all duration-300",

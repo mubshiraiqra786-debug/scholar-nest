@@ -6,10 +6,11 @@ import { ShieldCheck, ChevronRight } from "lucide-react";
 type PolicySection = "tos" | "ethical" | "privacy" | "cookie";
 
 type Props = {
-  initialSection?: PolicySection;
+  initialSection?: "tos" | "ethical" | "privacy" | "cookie";
+  onContact?: () => void;
 };
 
-export default function PoliciesPage({ initialSection = "privacy" }: Props) {
+export default function PoliciesPage({ initialSection = "privacy", onContact}: Props) {
   const sections = useMemo(
     () => [
       { id: "tos" as const, label: "Terms of Service" },
@@ -97,9 +98,13 @@ export default function PoliciesPage({ initialSection = "privacy" }: Props) {
             <p className="text-xs text-gray-500 mb-4 leading-relaxed">
               Our compliance team is available to clarify any institutional requirements.
             </p>
-            <a href="#" className="text-xs font-bold text-orange-600 hover:underline">
-              Contact Compliance →
-            </a>
+            <button
+  type="button"
+  onClick={() => onContact?.()}
+  className="text-xs font-bold text-orange-600 hover:underline"
+>
+  Contact Compliance →
+</button>
           </div>
         </aside>
 
@@ -236,7 +241,7 @@ export default function PoliciesPage({ initialSection = "privacy" }: Props) {
             </div>
           </section>
 
-          {/* Cookie */}
+          
           <section id="cookie" className="mb-20 scroll-mt-24">
             <h2 className="text-2xl font-bold text-slate-900 mb-6">Cookie Policy</h2>
             <p className="text-gray-500 text-xs leading-relaxed">
