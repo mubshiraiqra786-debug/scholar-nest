@@ -1,5 +1,6 @@
 import React from "react";
 import type { PolicySection } from "@/lib/types";
+import Image from "next/image";
 import { Mail, Facebook, Instagram } from "lucide-react";
 
 type FooterProps = {
@@ -9,17 +10,21 @@ type FooterProps = {
 
 export default function Footer({ onNavigate, onOpenPolicies }: FooterProps) {
   return (
-    <footer className="bg-[#0f1b2a] text-gray-300 py-16 px-6">
-      <div className="max-w-7xl mx-auto">
+    <footer className="bg-[#0f1b2a] text-gray-300 py-16 px-6 overflow-x-hidden">
+      <div className="max-w-7xl mx-auto overflow-x-hidden">
         {/* TOP GRID */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
           {/* LEFT BRAND / ABOUT */}
           <div className="lg:col-span-5 space-y-6">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-lg bg-orange-500 flex items-center justify-center">
-                <span className="text-white font-black">▣</span>
-              </div>
-              <span className="text-xl font-extrabold text-white">Scholar Nest</span>
+            <Image
+             src="/footer-image.png"
+             alt="Scholar Nest"
+             width={28}
+             height={28}
+             priority
+            />
+              <span className="text-xl font-extrabold text-orange-500">Scholar Nest</span>
             </div>
 
             <p className="text-sm leading-relaxed text-gray-400 max-w-md">
@@ -41,24 +46,32 @@ export default function Footer({ onNavigate, onOpenPolicies }: FooterProps) {
                 <div className="space-y-3 text-sm text-gray-400">
                   <div className="flex items-center gap-2">
                     <Mail className="w-4 h-4 text-orange-400" />
-                    <a className="hover:text-orange-400" href="mailto:support@academichelp.edu">
-                      support@academichelp.edu
+                    <a className="hover:text-orange-400" href="mailto:support@scholar-nest.com">
+                      support@scholar-nest.com
                     </a>
                   </div>
 
                   <div className="flex items-center gap-2">
                     <Facebook className="w-4 h-4 text-orange-400" />
-                    <a className="hover:text-orange-400" href="#" onClick={(e) => e.preventDefault()}>
+                    <a className="hover:text-orange-400"
+                       href="https://facebook.com/AcademicHelpUS"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                    >
                       facebook.com/AcademicHelpUS
-                    </a>
-                  </div>
+                     </a>
+                     </div>
 
-                  <div className="flex items-center gap-2">
-                    <Instagram className="w-4 h-4 text-orange-400" />
-                    <a className="hover:text-orange-400" href="#" onClick={(e) => e.preventDefault()}>
+                     <div className="flex items-center gap-2">
+                     <Instagram className="w-4 h-4 text-orange-400" />
+                     <a className="hover:text-orange-400"
+                      href="https://instagram.com/AcademicHelpUS"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >
                       @AcademicHelpUS
-                    </a>
-                  </div>
+                     </a>
+                   </div>
                 </div>
               </div>
 

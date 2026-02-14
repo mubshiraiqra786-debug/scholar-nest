@@ -38,10 +38,8 @@ export default function AcademicIntegrityPage({ onContact, }: Props) {
         </div>
 
         <div className="order-1 md:order-2 flex flex-col gap-6">
-          <span className="text-orange-600 font-bold text-xs tracking-widest py-7 uppercase">
-            Established Trust
-          </span>
-          <h1 className="text-4xl md:text-5xl lg:text-5xl font-extrabold text-slate-900 leading-tight">
+        
+          <h1 className="mt-6 text-4xl md:text-5xl lg:text-5xl font-extrabold text-slate-900 leading-tight">
             Bridging the gap between 
             <span className="text-orange-500"> academic pressure</span> and
             institutional excellence.

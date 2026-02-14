@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Menu, X, BookOpen } from "lucide-react";
+import { Menu, X, } from "lucide-react";
+import Image from "next/image";
 import { cn } from "@/lib/cn";
 
 type Props = {
@@ -54,9 +55,15 @@ export default function Navbar({ activePage, setPage, onScrollToSection }: Props
           className="flex items-center gap-2 group cursor-pointer"
           onClick={() => handleNavClick("home")}
         >
-          <div className="bg-[#FF6B00] p-1.5 rounded-lg transform transition-transform group-hover:rotate-12">
-            <BookOpen className="text-white w-6 h-6" />
-          </div>
+         <div className="flex items-center gap-2">
+  <Image
+    src="/scholar-nest-icon.png"
+    alt="Scholar Nest"
+    width={40}
+    height={40}
+    priority
+  />
+  </div>
           <span className="text-2xl font-black tracking-tighter text-slate-900">
             Scholar <span className="text-[#FF6B00]">Nest</span>
           </span>
