@@ -137,7 +137,7 @@ export default function Navbar() {
           </Link>
 
           <Link
-            href="/order"
+            href="/get-started"
             onClick={() => setMobileMenu(false)}
             className="bg-[#FF6B00] text-white text-center text-sm font-bold px-6 py-2.5 rounded-full hover:bg-[#e66000] shadow-lg shadow-orange-200 transition-all transform hover:-translate-y-0.5"
           >
