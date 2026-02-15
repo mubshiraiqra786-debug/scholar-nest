@@ -54,7 +54,7 @@ export default function Page() {
             <Hero onGoServices={() => setPage("services")} 
               onGoOrder={() => setPage("order")}/>
             <TrustBadges />
-            <ServicesSection onGoServices={() => setPage("services")} />
+            <ServicesSection  />
             <section id="how-it-works">
               <HowItWorks />
             </section>
@@ -96,15 +96,9 @@ export default function Page() {
 
   return (
     <div className="selection:bg-orange-100 selection:text-orange-900 bg-white min-h-screen">
-     <Navbar activePage={page} setPage={setPage} onScrollToSection={scrollToSection} />
+     
       {renderContent()}
-      <Footer
-  onNavigate={(p) => setPage(p)}
-  onOpenPolicies={(section: PolicySection) => {
-    setPolicySection(section);
-    setPage("policies");
-  }}
-/>
+
     </div>
   );
 }

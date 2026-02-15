@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 
 type Props = {
@@ -9,6 +10,7 @@ type Props = {
 };
 
 export default function CTASection({ onGoServices, onGoOrder  }: Props) {
+  const router = useRouter();
   return (
     <section className="py-16 px-6">
       <div className="max-w-7xl mx-auto rounded-[3rem] bg-slate-950 p-12 lg:p-24 relative overflow-hidden">
@@ -26,12 +28,12 @@ export default function CTASection({ onGoServices, onGoOrder  }: Props) {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <button type="button"
-                onClick={onGoOrder} className="bg-[#FF6B00] text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-xl shadow-orange-500/20 flex items-center justify-center gap-2">
+                onClick={() => router.push("/get-started")} className="bg-[#FF6B00] text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-xl shadow-orange-500/20 flex items-center justify-center gap-2">
                 Get Started <ArrowRight size={20} />
               </button>
 
               <button
-                onClick={onGoServices}
+                onClick={() => router.push("/services")}
                 className="bg-white/5 border border-white/10 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-white/10"
               >
                 Explore Services

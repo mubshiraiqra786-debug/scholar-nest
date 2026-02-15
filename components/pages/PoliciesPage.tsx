@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import { ShieldCheck, ChevronRight } from "lucide-react";
 
 type PolicySection = "tos" | "ethical" | "privacy" | "cookie";
@@ -11,6 +12,7 @@ type Props = {
 };
 
 export default function PoliciesPage({ initialSection = "privacy", onContact}: Props) {
+  const router = useRouter();
   const sections = useMemo(
     () => [
       { id: "tos" as const, label: "Terms of Service" },
@@ -100,7 +102,7 @@ export default function PoliciesPage({ initialSection = "privacy", onContact}: P
             </p>
             <button
   type="button"
-  onClick={() => onContact?.()}
+  onClick={() => router.push("/contact")}
   className="text-xs font-bold text-orange-600 hover:underline"
 >
   Contact Compliance →

@@ -1,5 +1,8 @@
 import React from "react";
+import { useRouter } from "next/navigation";
 import { Zap, ShieldCheck } from "lucide-react";
+
+
 
 type Props = {
   onGoServices?: () => void;
@@ -7,6 +10,7 @@ type Props = {
 };
 
 export default function HeroHero({ onGoServices, onGoOrder }: Props) {
+  const router = useRouter();
   return (
     <section className="relative bg-[#F8F7F5] pt-20 pb-20 lg:pt-32 lg:pb-32 overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10">
@@ -35,19 +39,19 @@ export default function HeroHero({ onGoServices, onGoOrder }: Props) {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
             <button
-                type="button"
-                onClick={onGoOrder}
-                className="px-8 py-3 bg-[#FF6B00] text-white rounded-2xl font-extrabold text-lg hover:bg-[#e66000] shadow-2xl shadow-orange-500/20 transition-all transform hover:-translate-y-1">
-                Get Started Now
-              </button>
-
-              <button
-                type="button"
-                onClick={onGoServices}
-                className="px-8 py-3 bg-white text-slate-900 border-2 border-slate-100 rounded-2xl font-extrabold text-lg hover:bg-slate-50 transition-all"
+             type="button"
+             onClick={() => router.push("/get-started")}
+             className="px-8 py-3 bg-[#FF6B00] text-white rounded-2xl font-extrabold text-lg hover:bg-[#e66000] shadow-2xl shadow-orange-500/20 transition-all transform hover:-translate-y-0.5"
               >
-                View Our Services
-              </button>
+             Get Started Now
+             </button>
+
+             <button
+             type="button"
+             onClick={() => router.push("/services")}
+            className="px-8 py-3 bg-white text-slate-900 border-2 border-slate-100 rounded-2xl font-extrabold text-lg hover:bg-slate-50 transition-all">
+             View Our Services
+             </button>
             </div>
           </div>
 

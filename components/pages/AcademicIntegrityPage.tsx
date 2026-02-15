@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 import {
   ShieldCheck,
   UserCheck,
@@ -15,6 +16,7 @@ type Props = {
 };
 
 export default function AcademicIntegrityPage({ onContact, }: Props) {
+  const router = useRouter();
   const scrollToUsePolicy = () => {
     const el = document.getElementById("use-policy");
     if (!el) return;
@@ -51,7 +53,7 @@ export default function AcademicIntegrityPage({ onContact, }: Props) {
             <button onClick={scrollToUsePolicy} className="bg-orange-600 text-white px-8 py-4 rounded-lg font-bold hover:bg-orange-700 transition-all shadow-lg hover:shadow-orange-200">
               View Our Standards
             </button>
-            <button onClick={() => onContact?.()} className="border-2 border-orange-600 text-orange-600 px-8 py-4 rounded-lg font-bold hover:bg-orange-50 transition-all">
+            <button onClick={() => router.push("/contact")} className="border-2 border-orange-600 text-orange-600 px-8 py-4 rounded-lg font-bold hover:bg-orange-50 transition-all">
               Contact Compliance
             </button>
           </div>
