@@ -12,7 +12,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/reviews",
     "/contact",
     "/get-started",
-    "/order", // agar yeh route live hai
   ];
 
   const now = new Date();
