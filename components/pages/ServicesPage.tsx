@@ -5,7 +5,7 @@ import { services } from "@/lib/servicesData";
 
 export default function ServicesPage() {
   return (
-    <div className="pt-32 pb-24">
+    <div className="bg-white min-h-screen pt-32 pb-24">
       <div className="max-w-7xl mx-auto px-6">
         {/* HERO */}
         <div
