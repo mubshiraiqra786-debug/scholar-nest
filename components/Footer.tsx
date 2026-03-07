@@ -12,8 +12,8 @@ export default function Footer() {
         {/* TOP GRID */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
           {/* LEFT BRAND / ABOUT */}
-          <div className="lg:col-span-5 space-y-6 text-center lg:text-left">
-            <Link href="/" className="flex items-center justify-center lg:justify-start gap-3">
+          <div className="lg:col-span-5 space-y-6 text-center">
+            <Link href="/" className="flex items-center gap-3">
               <Image
                 src="/footer-image.png"
                 alt="Scholar Nest"
