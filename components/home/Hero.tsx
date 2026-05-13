@@ -32,9 +32,9 @@ export default function HeroHero({ onGoServices, onGoOrder }: Props) {
             </h1>
 
             <p className="text-xl text-slate-600 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-              Professional support tailored to US University syllabi. We bridge
-              the gap between effort and excellence with 24/7 specialist
-              availability.
+              Professional support tailored to US University Syllabus. We bridge
+              the gap between effort and excellence with 24/7 Specialist
+              Availability.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">

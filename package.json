@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@sendgrid/mail": "^8.1.6",
+    "@supabase/supabase-js": "^2.103.3",
     "lucide-react": "^0.562.0",
     "next": "16.1.4",
     "react": "19.2.3",

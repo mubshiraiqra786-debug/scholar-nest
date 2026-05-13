@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Mail, Facebook, Instagram } from "lucide-react";
+import { Mail, Facebook, Instagram, } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -52,29 +52,29 @@ export default function Footer() {
                     </a>
                   </div>
 
-                  <div className="flex items-center gap-2">
-                    <Facebook className="w-4 h-4 text-orange-400" />
-                    <a
-                      className="hover:text-orange-400"
-                      href="https://facebook.com/AcademicHelpUS"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      facebook.com/AcademicHelpUS
-                    </a>
-                  </div>
+                  <div className="flex items-center gap-4">
 
-                  <div className="flex items-center gap-2">
-                    <Instagram className="w-4 h-4 text-orange-400" />
+              {/* Facebook Icon */}
+                   <a
+                    href="https://www.facebook.com/ScholarNest"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-orange-400"
+                    >
+                    <Facebook className="w-5 h-5 text-orange-400" />
+                    </a>
+
+              {/* Instagram Icon */}
                     <a
-                      className="hover:text-orange-400"
-                      href="https://instagram.com/AcademicHelpUS"
+                      href="https://www.instagram.com/scholarnest.help"
                       target="_blank"
                       rel="noopener noreferrer"
+                      className="hover:text-orange-400"
                     >
-                      @AcademicHelpUS
+                    <Instagram className="w-5 h-5 text-orange-400" />
                     </a>
-                  </div>
+
+                </div>
                 </div>
               </div>
 
