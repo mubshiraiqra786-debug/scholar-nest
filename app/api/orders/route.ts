@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic'
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabaseAdmin';
 
@@ -44,7 +45,6 @@ export async function POST(req: Request) {
           word_count: Number(word_count),
           deadline,
           instructions: instructions ?? '',
-          status: 'pending',
         },
       ])
       .select()
