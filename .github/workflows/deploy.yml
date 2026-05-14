@@ -49,6 +49,12 @@ jobs:
             cd /var/www/scholar-nest
             git fetch --all
             git reset --hard origin/master
+            echo "NEXT_PUBLIC_SUPABASE_URL=${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}" > .env
+            echo "NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}" >> .env
+            echo "SUPABASE_SERVICE_ROLE_KEY=${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" >> .env
+            echo "SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }}" >> .env
+            echo "SENDGRID_FROM_EMAIL=${{ secrets.SENDGRID_FROM_EMAIL }}" >> .env
+            echo "SENDGRID_TO_EMAIL=${{ secrets.SENDGRID_TO_EMAIL }}" >> .env
             npm ci
             npm run build
             sudo systemctl restart scholar-nest
