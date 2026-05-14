@@ -1,11 +1,12 @@
 export const dynamic = 'force-dynamic'
-import { NextResponse } from 'next/server';
-import { supabaseAdmin } from '@/lib/supabaseAdmin';
+import { NextResponse } from 'next/server'
+import { supabaseAdmin } from '@/lib/supabaseAdmin'
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
-    const { order_id, file_url, file_name } = body;
+    const body = await req.json()
+
+    const { order_id, file_url, file_name } = body
 
     const { data, error } = await supabaseAdmin
       .from('order_files')
@@ -20,13 +21,24 @@ export async function POST(req: Request) {
       .single();
 
     if (error) {
-      console.error('Supabase order_files error:', error);
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      console.error(error)
+
+      return NextResponse.json(
+        { error: error.message },
+        { status: 500 }
+      )
     }
 
-    return NextResponse.json({ success: true, file: data });
+    return NextResponse.json({
+      success: true,
+      data,
+    })
   } catch (error) {
-    console.error('Server error:', error);
-    return NextResponse.json({ error: 'Server error' }, { status: 500 });
+    console.error(error)
+
+    return NextResponse.json(
+      { error: 'Server error' },
+      { status: 500 }
+    )
   }
 }
