@@ -14,7 +14,7 @@ export default function ServicesPage() {
                 flex items-center justify-center text-center"
         >
           <img
-            src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2000&auto=format&fit=crop"
+            src="library_image.svg"
             className="absolute inset-0 w-full h-full object-cover opacity-40"
             alt="Library"
           />

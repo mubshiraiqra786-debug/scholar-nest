@@ -16,7 +16,9 @@ export default function OrderNowPage() {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState('');
+  const [customSubject, setCustomSubject] = useState('');
   const [assignmentType, setAssignmentType] = useState('');
+  const [customAssignmentType, setCustomAssignmentType] = useState('');
   const [wordCount, setWordCount] = useState('');
   const [deadline, setDeadline] = useState('');
   const [description, setDescription] = useState('');
@@ -26,6 +28,50 @@ export default function OrderNowPage() {
   const [loading, setLoading] = useState(false);
   
   const [successMessage, setSuccessMessage] = useState('');
+
+  const subjects = [
+    'Computer Science',
+    'Information Technology',
+    'Software Engineering',
+    'Business Studies',
+    'Marketing',
+    'Finance',
+    'Accounting',
+    'Economics',
+    'Psychology',
+    'Nursing',
+    'Law',
+    'Engineering',
+    'Mathematics',
+    'Statistics',
+    'Education',
+    'Healthcare',
+    'Other',
+  ];
+
+  const assignmentTypes = [
+    'Essay',
+    'Research Paper',
+    'Case Study',
+    'Discussion Post',
+    'Term Paper',
+    'Literature Review',
+    'Reflective Essay',
+    'Annotated Bibliography',
+    'Capstone Project',
+    'Dissertation',
+    'Thesis',
+    'Business Report',
+    'Lab Report',
+    'Presentation',
+    'PowerPoint Presentation',
+    'Excel Assignment',
+    'Power BI Project',
+    'Statistics Assignment',
+    'Programming Assignment',
+    'Coursework',
+    'Other',
+  ];
 
   // Handle File
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -70,8 +116,16 @@ export default function OrderNowPage() {
       formData.append('full_name', fullName);
       formData.append('email', email);
       formData.append('academic_level', academicLevel);
-      formData.append('subject', subject);
-      formData.append('assignment_type', assignmentType);
+      formData.append(
+        'subject',
+        subject === 'Other' ? customSubject : subject
+      );
+      formData.append(
+        'assignment_type',
+        assignmentType === 'Other'
+          ? customAssignmentType
+          : assignmentType
+      );
       formData.append('word_count', wordCount);
       formData.append('deadline', deadline);
 
@@ -101,13 +155,14 @@ export default function OrderNowPage() {
       // Reset Form
       setFullName('');
       setEmail('');
-      setSubject('');
+      setCustomSubject('');
       setAssignmentType('');
       setWordCount('');
       setDeadline('');
       setDescription('');
       setSelectedFile(null);
       setAcademicLevel('Undergraduate');
+      setCustomAssignmentType('');
       setFileError('');
 
       const fileInput = document.getElementById(
@@ -133,11 +188,11 @@ export default function OrderNowPage() {
         {/* Header */}
         <div className="text-center mb-10">
           <h1 className="text-3xl font-extrabold text-slate-900 mb-2">
-            Calculate Your Project Estimate
+          Get Expert Academic Support
           </h1>
 
           <p className="text-gray-500 text-sm">
-            Professional assistance with institutional trust and academic integrity.
+          Submit your project details and receive personalized assistance from qualified academic experts.
           </p>
         </div>
 
@@ -160,12 +215,12 @@ export default function OrderNowPage() {
                   Academic Level
                 </label>
 
-                <div className="grid grid-cols-2 gap-2 rounded-xl bg-slate-50 p-2 border border-slate-100">
+                <div className="flex gap-2 rounded-xl bg-slate-50 p-2 border border-slate-100">
 
                   <button
                     type="button"
                     onClick={() => setAcademicLevel('Undergraduate')}
-                    className={`py-2 rounded-lg text-sm font-bold transition-all ${
+                    className={`flex-1 py-2 rounded-lg text-sm font-bold transition-all ${
                       academicLevel === 'Undergraduate'
                         ? 'bg-white text-black shadow-sm ring-1 ring-orange-100'
                         : 'text-slate-400 hover:text-slate-600'
@@ -177,13 +232,25 @@ export default function OrderNowPage() {
                   <button
                     type="button"
                     onClick={() => setAcademicLevel('Graduate')}
-                    className={`py-2 rounded-lg text-sm font-bold transition-all ${
+                    className={`flex-1 py-2 rounded-lg text-sm font-bold transition-all ${
                       academicLevel === 'Graduate'
                         ? 'bg-orange-50 text-orange-600 shadow-sm ring-1 ring-orange-100'
                         : 'text-slate-400 hover:text-slate-600'
                     }`}
                   >
                     Graduate
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setAcademicLevel('PHD')}
+                    className={`flex-1 py-2 rounded-lg text-sm font-bold transition-all ${
+                      academicLevel === 'PHD'
+                        ? 'bg-orange-50 text-orange-600 shadow-sm ring-1 ring-orange-100'
+                        : 'text-slate-400 hover:text-slate-600'
+                    }`}
+                  >
+                    PHD
                   </button>
 
                 </div>
@@ -193,7 +260,7 @@ export default function OrderNowPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
                 <div className="space-y-2">
-                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+                  <label className="block text-[12px] font-bold text-slate-500 uppercase tracking-widest">
                     Full Name
                   </label>
 
@@ -208,7 +275,7 @@ export default function OrderNowPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+                  <label className="block text-[12px] font-bold text-slate-500 uppercase tracking-widest">
                     Email
                   </label>
 
@@ -227,34 +294,56 @@ export default function OrderNowPage() {
               {/* Subject & Type */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-                <div className="space-y-2">
-                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest">
-                    Subject
-                  </label>
+              <div className="space-y-2">
+                <label className="block text-[12px] font-bold text-slate-500 uppercase tracking-widest">
+                  Subject
+                </label>
 
-                  <input
-                    type="text"
-                    value={subject}
-                    onChange={(e) => setSubject(e.target.value)}
-                    placeholder="Enter subject"
-                    required
-                    className="w-full border border-slate-200 text-slate-900 placeholder:text-slate-400 rounded-xl px-3 py-2 focus:border-orange-500 focus:ring-2 focus:ring-orange-100 outline-none"
-                  />
+            <select
+                value={subject}
+                onChange={(e) => setSubject(e.target.value)}
+                required
+                className={`w-full h-[44px] border border-slate-200 rounded-xl px-3 py-2 bg-white focus:border-orange-500 focus:ring-2 focus:ring-orange-100 outline-none ${
+                subject === ''
+                ? 'text-slate-400' : 'text-slate-900'
+                }`}
+                  >
+                <option value="" disabled>
+                  Select Subject
+                </option>
+
+              {subjects.map((item) => (
+                 <option key={item} value={item} className="text-slate-900">
+                  {item}
+                 </option>
+                  ))}
+              </select>
                 </div>
-
                 <div className="space-y-2">
-                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+                  <label className="block text-[12px] font-bold text-slate-500 uppercase tracking-widest">
                     Assignment Type
                   </label>
 
-                  <input
-                    type="text"
-                    value={assignmentType}
-                    onChange={(e) => setAssignmentType(e.target.value)}
-                    placeholder="Enter assignment type"
-                    required
-                    className="w-full border border-slate-200 text-slate-900 placeholder:text-slate-400 rounded-xl px-3 py-2 focus:border-orange-500 focus:ring-2 focus:ring-orange-100 outline-none"
-                  />
+            <select
+              value={assignmentType}
+              onChange={(e) => setAssignmentType(e.target.value)}
+              required
+              className={`w-full border border-slate-200 rounded-xl px-3 py-2 bg-white focus:border-orange-500 focus:ring-2 focus:ring-orange-100 outline-none ${
+              assignmentType === ''
+              ? 'text-slate-400'
+              : 'text-slate-900'
+                }`}
+                 >
+               <option value="" disabled>
+               Select Assignment Type
+               </option>
+
+             {assignmentTypes.map((item) => (
+            <option key={item} value={item} className="text-slate-900">
+             {item}
+            </option>
+             ))}
+           </select>
                 </div>
 
               </div>
@@ -270,7 +359,7 @@ export default function OrderNowPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
 
                 <div className="space-y-2">
-                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+                  <label className="block text-[12px] font-bold text-slate-500 uppercase tracking-widest">
                     Word Count
                   </label>
 
@@ -285,7 +374,7 @@ export default function OrderNowPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+                  <label className="block text-[12px] font-bold text-slate-500 uppercase tracking-widest">
                     Deadline
                   </label>
 
@@ -302,7 +391,7 @@ export default function OrderNowPage() {
 
               {/* Description */}
               <div className="space-y-2">
-                <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+                <label className="block text-[12px] font-bold text-slate-500 uppercase tracking-widest">
                   Project Description
                 </label>
 

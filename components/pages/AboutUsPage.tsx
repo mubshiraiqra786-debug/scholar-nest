@@ -38,7 +38,7 @@ const AboutUs: React.FC = () => {
           </div>
           <div className="relative">
             <img 
-              src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&q=80&w=800" 
+              src="library_image.svg" 
               alt="Library Interior" 
               className="rounded-2xl shadow-2xl object-cover h-[450px] w-full"
             />

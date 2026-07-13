@@ -18,7 +18,7 @@ export default function HeroHero({ onGoServices, onGoOrder }: Props) {
       </div>
 
       <div className="max-w-6xl mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-24 items-center">
           <div className="space-y-8 text-center lg:text-left">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 border border-orange-100 text-[#FF6B00] text-xs font-bold uppercase tracking-widest animate-bounce">
               <Zap size={14} className="fill-current" /> Next-Gen Academic Assistance </div>
