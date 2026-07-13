@@ -19,7 +19,7 @@ jobs:
           node-version: "22"
 
       - name: Install deps
-        run: npm ci
+        run: npm install
 
       - name: Build
         run: npm run build
@@ -54,7 +54,7 @@ jobs:
             echo "SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }}" >> .env
             echo "SENDGRID_FROM_EMAIL=${{ secrets.SENDGRID_FROM_EMAIL }}" >> .env
             echo "SENDGRID_TO_EMAIL=${{ secrets.SENDGRID_TO_EMAIL }}" >> .env
-            npm ci
+            npm install
             npm run build
             sudo systemctl restart scholar-nest
             sudo systemctl status scholar-nest --no-pager -l
