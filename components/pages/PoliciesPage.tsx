@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { ShieldCheck, ChevronRight } from "lucide-react";
 
@@ -25,32 +25,27 @@ export default function PoliciesPage({ initialSection = "privacy", onContact}: P
 
   const allowedIds = useMemo(() => sections.map((s) => s.id), [sections]);
 
-  const [activeSection, setActiveSection] = useState<PolicySection>(initialSection);
+  const [hash, setHash] = React.useState<PolicySection>(initialSection);
 
-  // When parent changes initialSection (Footer se, etc.)
-  useEffect(() => {
-    setActiveSection(initialSection);
-  }, [initialSection]);
+useEffect(() => {
+  const updateHash = () => {
+    const current = window.location.hash.replace("#", "") as PolicySection;
 
-  // Scroll to hash OR initialSection safely
-  useEffect(() => {
-    const hash = window.location.hash.replace("#", "") as PolicySection;
+    if (allowedIds.includes(current)) {
+      setHash(current);
+    } else {
+      setHash(initialSection);
+    }
+  };
 
-    const target: PolicySection =
-      (allowedIds.includes(hash) ? hash : initialSection) ?? "privacy";
+  updateHash();
 
-    // Update active section
-    setActiveSection(target);
+  window.addEventListener("hashchange", updateHash);
 
-    // Next paint ke baad scroll (safe)
-    requestAnimationFrame(() => {
-      document.getElementById(target)?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    });
-  }, [allowedIds, initialSection]);
+  return () => window.removeEventListener("hashchange", updateHash);
+}, [allowedIds, initialSection]);
 
+const activeSection = hash;
   return (
     <div className="min-h-screen bg-white font-sans text-slate-800">
       {/* Header */}
@@ -81,7 +76,10 @@ export default function PoliciesPage({ initialSection = "privacy", onContact}: P
               <a
                 key={section.id}
                 href={`#${section.id}`}
-                onClick={() => setActiveSection(section.id)}
+                onClick={() => {
+                window.location.hash = section.id;
+                }
+                }
                 className={[
                   "flex items-center justify-between p-2 rounded-md text-sm transition-colors",
                   activeSection === section.id
@@ -101,12 +99,12 @@ export default function PoliciesPage({ initialSection = "privacy", onContact}: P
               Our compliance team is available to clarify any institutional requirements.
             </p>
             <button
-  type="button"
-  onClick={() => router.push("/contact")}
-  className="text-xs font-bold text-orange-600 hover:underline"
->
-  Contact Compliance →
-</button>
+              type="button"
+              onClick={() => router.push("/contact")}
+              className="text-xs font-bold text-orange-600 hover:underline"
+            >
+              Contact Compliance →
+            </button>
           </div>
         </aside>
 
